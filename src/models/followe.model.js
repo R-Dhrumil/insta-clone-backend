@@ -3,10 +3,14 @@ const mongoose = require("mongoose");
 const followeSchema = new mongoose.Schema(
   {
     follower: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "follower id is required for creating the follow"],
     },
     followee: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: [true, "followee id is required for creating the follow"],
     },
     status:{
       type: String,
