@@ -25,7 +25,7 @@ async function registerController(req, res) {
     $or: [{ username }, { email }],
   });
 
-  console.log(isUserAlreadyExists);
+  // console.log(`user ${isUserAlreadyExists.email} already exists`);
 
   if (isUserAlreadyExists) {
     return res.status(409).json({
