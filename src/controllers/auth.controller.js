@@ -87,6 +87,13 @@ async function loginController(req, res) {
    *
    */
 
+
+  if(!password || password.trim() === ""){
+    return res.status(409).json({
+      message: "Check your password chaman"
+    })
+  }
+
   const user = await userModel.findOne({
     // $or operator takes array of the condition like if we have username so find the username in the database
 
