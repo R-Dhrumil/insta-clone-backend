@@ -55,7 +55,7 @@ async function registerController(req, res) {
      */
     {
       id: user._id,
-      username: username
+      username: username,
     },
     process.env.JWT_SECRET,
     { expiresIn: "1d" },
@@ -87,29 +87,30 @@ async function loginController(req, res) {
    *
    */
 
-
-  if(!password || password.trim() === ""){
+  if (!password || password.trim() === "") {
     return res.status(409).json({
-      message: "Check your password chaman"
-    })
+      message: "Check your password chaman",
+    });
   }
 
-  const user = await userModel.findOne({
-    // $or operator takes array of the condition like if we have username so find the username in the database
+  const user = await userModel
+    .findOne({
+      // $or operator takes array of the condition like if we have username so find the username in the database
 
-    $or: [
-      {
-        /**
+      $or: [
+        {
+          /**
       condition */
-        username: username,
-      },
-      {
-        /**
-         * condition */
-        email: email,
-      },
-    ],
-  });
+          username: username,
+        },
+        {
+          /**
+           * condition */
+          email: email,
+        },
+      ],
+    })
+    .select("+password"); // it is forcing to fetch password
 
   if (!user) {
     return res.status(404).json({
@@ -128,7 +129,7 @@ async function loginController(req, res) {
   const token = jwt.sign(
     {
       id: user._id,
-      username: username
+      username: username,
     },
     process.env.JWT_SECRET,
     { expiresIn: "1d" },

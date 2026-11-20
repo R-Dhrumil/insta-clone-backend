@@ -47,4 +47,11 @@ postRouter.post(
   postController.likePostController,
 );
 
+/**
+ * @route GET /api/post/feed - [get all post of the user]
+ * @desc Get the feed of posts from users that the authenticated user follows. The server will retrieve the posts from the database and return them in the response.
+ */
+
+postRouter.get("/feed", postController.feedController);
+
 module.exports = postRouter;

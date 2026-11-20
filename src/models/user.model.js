@@ -11,7 +11,11 @@ const userSchema = new mongoose.Schema({
     unique: [true, "Email already exists"],
     require: [true, "Email is required"],
   },
-  password: { type: String, require: [true, "Password is required"] },
+  password: {
+    type: String,
+    require: [true, "Password is required"],
+    select: false, // it stopes reading this feild
+  },
   bio: String,
 
   profile_img: {
